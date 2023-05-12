@@ -1,8 +1,12 @@
 package service
 
-import "github.com/Asstrahanec/PracticeManagementAPI/pkg/repository"
+import (
+	"github.com/Asstrahanec/PracticeManagementAPI/model"
+	"github.com/Asstrahanec/PracticeManagementAPI/pkg/repository"
+)
 
 type Authorization interface {
+	CreateUser(user model.User) (int, error)
 }
 
 type Student interface {
@@ -32,5 +36,7 @@ type Service struct {
 }
 
 func NewService(repos *repository.Repository) *Service {
-	return &Service{}
+	return &Service{
+		Authorization: NewAuthService(repos.Authorization),
+	}
 }

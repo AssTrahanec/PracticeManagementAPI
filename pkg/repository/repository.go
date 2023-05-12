@@ -1,8 +1,21 @@
 package repository
 
-import "github.com/jmoiron/sqlx"
+import (
+	"github.com/Asstrahanec/PracticeManagementAPI/model"
+	"github.com/jmoiron/sqlx"
+)
+
+const (
+	studentsTable     = "students"
+	companiesTable    = "companies"
+	requestsTable     = "requests"
+	usersTable        = "users"
+	practicesTable    = "practices"
+	universitiesTable = "universities"
+)
 
 type Authorization interface {
+	CreateUser(user model.User) (int, error)
 }
 
 type Student interface {
@@ -32,5 +45,7 @@ type Repository struct {
 }
 
 func NewRepository(db *sqlx.DB) *Repository {
-	return &Repository{}
+	return &Repository{
+		Authorization: NewAuthPostgres(db),
+	}
 }

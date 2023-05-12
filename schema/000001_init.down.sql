@@ -1,0 +1,7 @@
+DROP TABLE IF EXISTS universities;
+DROP TABLE IF EXISTS practices;
+DROP TABLE IF EXISTS requests;
+
+DROP TABLE IF EXISTS companies;
+DROP TABLE IF EXISTS students;
+DROP TABLE IF EXISTS users;

@@ -1,1 +1,7 @@
 port : "8080"
+db:
+  username: "ilya"
+  host: "localhost"
+  port: "15432"
+  dbname: "practice"
+  sslmode: "disable"

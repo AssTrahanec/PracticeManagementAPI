@@ -67,10 +67,11 @@ func (h *Handler) InitRoutes() *gin.Engine {
 	practice := api.Group("/practices")
 	{
 		practice.POST("/", h.createPractice)
-		practice.GET("/", h.getPractices)
+		practice.GET("/", h.getPracticesOfCurrentUser)
 		practice.GET("/:id", h.getPractice)
 		practice.PUT("/:id", h.updatePractice)
 		practice.DELETE("/:id", h.deletePractice)
+		practice.GET("/all", h.getPractices)
 	}
 
 	// University routes

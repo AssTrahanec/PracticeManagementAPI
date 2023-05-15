@@ -26,6 +26,12 @@ type Student interface {
 	Update(userId, id int, input model.UpdateStudentInput) error
 }
 type Practice interface {
+	Create(userId int, practice model.Practice) (int, error)
+	GetAll(userId int) ([]model.Practice, error)
+	GetAllOfCurrentUser(userId int) ([]model.Practice, error)
+	GetById(userId, id int) (model.Practice, error)
+	Delete(userId, id int) error
+	Update(userId, id int, input model.UpdatePracticeInput) error
 }
 
 type Company interface {
@@ -64,5 +70,6 @@ func NewRepository(db *sqlx.DB) *Repository {
 		Request:       NewRequestPostgres(db),
 		Company:       NewCompanyPostgres(db),
 		Student:       NewStudentPostgres(db),
+		Practice:      NewPracticePostgres(db),
 	}
 }

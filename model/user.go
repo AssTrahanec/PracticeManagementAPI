@@ -8,6 +8,7 @@ type User struct {
 }
 
 type Auth struct {
-	Token string `json:"token"`
-	Role  string `json:"role"`
+	Token  string `json:"token"`
+	Role   string `json:"role"`
+	UserId int    `json:"userid"`
 }

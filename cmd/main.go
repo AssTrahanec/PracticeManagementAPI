@@ -1,19 +1,22 @@
 package main
 
 import (
-	practice "github.com/Asstrahanec/PracticeManagementAPI"
 	"github.com/Asstrahanec/PracticeManagementAPI/pkg/handler"
 	"github.com/Asstrahanec/PracticeManagementAPI/pkg/repository"
 	"github.com/Asstrahanec/PracticeManagementAPI/pkg/service"
 	"github.com/joho/godotenv"
 	_ "github.com/lib/pq"
+	"github.com/rs/cors"
 	"github.com/sirupsen/logrus"
 	"github.com/spf13/viper"
+	"net/http"
 	"os"
 )
 
 func main() {
+
 	logrus.SetFormatter(&logrus.JSONFormatter{})
+
 	if err := initConfig(); err != nil {
 		logrus.Fatalf("error initialising configs: %s", err.Error())
 	}
@@ -37,8 +40,19 @@ func main() {
 	services := service.NewService(repos)
 	handlers := handler.NewHandler(services)
 
-	srv := new(practice.Server)
-	if err := srv.Run(viper.GetString("port"), handlers.InitRoutes()); err != nil {
+	// Создание обработчика CORS
+	corsHandler := cors.New(cors.Options{
+		AllowedOrigins:   []string{"http://localhost:3000"},
+		AllowedMethods:   []string{"GET", "POST", "PUT", "DELETE", "OPTIONS"},
+		AllowedHeaders:   []string{"Authorization", "Content-Type"},
+		AllowCredentials: true,
+	}).Handler(handlers.InitRoutes())
+
+	// Использование middleware для разрешения CORS
+	http.Handle("/", corsHandler)
+
+	// Запуск сервера на нужном порту
+	if err := http.ListenAndServe(":"+viper.GetString("port"), nil); err != nil {
 		logrus.Fatalf("error occured while running server %s", err.Error())
 	}
 }

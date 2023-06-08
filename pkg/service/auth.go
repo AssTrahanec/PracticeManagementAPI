@@ -49,8 +49,9 @@ func (s *AuthService) GenerateToken(login, password string) (model.Auth, error) 
 	})
 	tokenString, err := token.SignedString([]byte(signingKey))
 	return model.Auth{
-		Token: tokenString,
-		Role:  user.Role,
+		Token:  tokenString,
+		Role:   user.Role,
+		UserId: user.ID,
 	}, err
 	//return token.SignedString([]byte(signingKey))
 }

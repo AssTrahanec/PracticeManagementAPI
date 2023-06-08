@@ -43,7 +43,7 @@ func (r *PracticePostgres) GetAllOfCurrentUser(userId int) ([]model.Practice, er
 func (r *PracticePostgres) GetAll(userId int) ([]model.Practice, error) {
 	var practices []model.Practice
 	query := fmt.Sprintf("SELECT * FROM %s", practicesTable)
-	err := r.db.Select(&practices, query, userId)
+	err := r.db.Select(&practices, query)
 
 	return practices, err
 }

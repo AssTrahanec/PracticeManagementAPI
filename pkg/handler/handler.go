@@ -72,6 +72,7 @@ func (h *Handler) InitRoutes() *gin.Engine {
 		practice.PUT("/:id", h.updatePractice)
 		practice.DELETE("/:id", h.deletePractice)
 		practice.GET("/all", h.getPractices)
+		practice.GET("/allpublic", h.getPublicPractices)
 	}
 
 	// University routes

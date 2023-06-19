@@ -38,6 +38,13 @@ func (r *AuthPostgres) CreateUser(user model.User) (int, error) {
 	} else if user.Role == "company" {
 		companyQuery := fmt.Sprintf("INSERT INTO %s (company_id) VALUES ($1)", companiesTable)
 		_, err := tx.Exec(companyQuery, id)
+
+		if err != nil {
+			tx.Rollback()
+			return 0, err
+		}
+		practiceQuery := fmt.Sprintf("INSERT INTO %s (company_id) VALUES ($1)", practicesTable)
+		_, err = tx.Exec(practiceQuery, id)
 		if err != nil {
 			tx.Rollback()
 			return 0, err

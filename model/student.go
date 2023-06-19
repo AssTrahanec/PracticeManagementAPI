@@ -24,7 +24,6 @@ type UpdateStudentInput struct {
 	StudentName  *string  `json:"student_name"`
 	StudentEmail *string  `json:"student_email"`
 	StudentPhone *string  `json:"student_phone_number"`
-	Speciality   *string  `json:"speciality"`
 }
 
 func (i UpdateStudentInput) Validate() error {
@@ -32,8 +31,7 @@ func (i UpdateStudentInput) Validate() error {
 		i.AvgMark == nil &&
 		i.StudentName == nil &&
 		i.StudentEmail == nil &&
-		i.StudentPhone == nil &&
-		i.Speciality == nil {
+		i.StudentPhone == nil {
 		return errors.New("update structure has no values")
 	}
 

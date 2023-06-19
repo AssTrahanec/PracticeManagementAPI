@@ -20,6 +20,7 @@ type Student interface {
 type Practice interface {
 	Create(userId int, practice model.Practice) (int, error)
 	GetAll(userId int) ([]model.Practice, error)
+	GetAllPublic(userId int) ([]model.Practice, error)
 	GetAllOfCurrentUser(userId int) ([]model.Practice, error)
 	GetById(userId, id int) (model.Practice, error)
 	Delete(userId, id int) error

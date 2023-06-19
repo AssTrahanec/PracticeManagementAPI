@@ -32,6 +32,7 @@ type Practice interface {
 	GetById(userId, id int) (model.Practice, error)
 	Delete(userId, id int) error
 	Update(userId, id int, input model.UpdatePracticeInput) error
+	GetAllPublic(userId int) ([]model.Practice, error)
 }
 
 type Company interface {

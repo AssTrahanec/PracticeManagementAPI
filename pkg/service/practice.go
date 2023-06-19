@@ -22,6 +22,9 @@ func (s *PracticeService) GetAllOfCurrentUser(userId int) ([]model.Practice, err
 func (s *PracticeService) GetAll(userId int) ([]model.Practice, error) {
 	return s.repo.GetAll(userId)
 }
+func (s *PracticeService) GetAllPublic(userId int) ([]model.Practice, error) {
+	return s.repo.GetAllPublic(userId)
+}
 func (s *PracticeService) GetById(userId, id int) (model.Practice, error) {
 	return s.repo.GetById(userId, id)
 }

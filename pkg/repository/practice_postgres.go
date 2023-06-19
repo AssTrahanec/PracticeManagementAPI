@@ -47,6 +47,12 @@ func (r *PracticePostgres) GetAll(userId int) ([]model.Practice, error) {
 
 	return practices, err
 }
+func (r *PracticePostgres) GetAllPublic(userId int) ([]model.Practice, error) {
+	var practices []model.Practice
+	query := fmt.Sprintf("SELECT * FROM %s WHERE practice_status = '%s'", practicesTable, "public")
+	err := r.db.Select(&practices, query)
+	return practices, err
+}
 func (r *PracticePostgres) GetById(userId, id int) (model.Practice, error) {
 	var practice model.Practice
 	query := fmt.Sprintf("SELECT * FROM %s WHERE id = $1;", practicesTable)
@@ -114,6 +120,11 @@ func (r *PracticePostgres) Update(userId, id int, input model.UpdatePracticeInpu
 	if input.AdditionalInformation != nil {
 		setValues = append(setValues, fmt.Sprintf("additional_information=$%d", argId))
 		args = append(args, input.AdditionalInformation)
+		argId++
+	}
+	if input.PracticeStatus != nil {
+		setValues = append(setValues, fmt.Sprintf("practice_status=$%d", argId))
+		args = append(args, input.PracticeStatus)
 		argId++
 	}
 

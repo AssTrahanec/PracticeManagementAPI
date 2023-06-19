@@ -9,7 +9,7 @@ type Request struct {
 	Status         string `json:"status" db:"status"`
 	ProjectsLink   string `json:"projects_link" db:"projects_link"`
 	LanguageSkills string `json:"language_skills" db:"language_skills"`
-	WorkExperience int    `json:"work_experience" db:"work_experience"`
+	WorkExperience string `json:"work_experience" db:"work_experience"`
 	Skills         string `json:"skills" db:"skills"`
 }
 
@@ -17,7 +17,7 @@ type UpdateRequestInput struct {
 	Status         *string `json:"status"`
 	ProjectsLink   *string `json:"projects_link"`
 	LanguageSkills *string `json:"language_skills"`
-	WorkExperience *int    `json:"work_experience"`
+	WorkExperience *string `json:"work_experience"`
 	Skills         *string `json:"skills"`
 }
 

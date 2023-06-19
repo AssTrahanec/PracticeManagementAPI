@@ -50,6 +50,22 @@ func (h *Handler) getPractices(c *gin.Context) {
 		Data: practices,
 	})
 }
+func (h *Handler) getPublicPractices(c *gin.Context) {
+	userId, err := getUserId(c)
+	if err != nil {
+		return
+	}
+	practices, err := h.services.Practice.GetAllPublic(userId)
+	if err != nil {
+		newErrorResponse(c, http.StatusInternalServerError, err.Error())
+		return
+	}
+
+	c.JSON(http.StatusOK, getAllPracticeResponse{
+		Data: practices,
+	})
+}
+
 func (h *Handler) getPracticesOfCurrentUser(c *gin.Context) {
 	userId, err := getUserId(c)
 	if err != nil {

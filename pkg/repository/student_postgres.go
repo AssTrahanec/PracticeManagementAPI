@@ -75,11 +75,6 @@ func (r *StudentPostgres) Update(userId, id int, input model.UpdateStudentInput)
 		args = append(args, *input.StudentPhone)
 		argID++
 	}
-	if input.Speciality != nil {
-		setValues = append(setValues, fmt.Sprintf("speciality=$%d", argID))
-		args = append(args, *input.Speciality)
-		argID++
-	}
 
 	setQuery := strings.Join(setValues, ", ")
 

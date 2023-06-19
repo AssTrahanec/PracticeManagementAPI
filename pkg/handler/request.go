@@ -1,6 +1,7 @@
 package handler
 
 import (
+	"fmt"
 	"github.com/Asstrahanec/PracticeManagementAPI/model"
 	"github.com/gin-gonic/gin"
 	"net/http"
@@ -85,6 +86,7 @@ func (h *Handler) updateRequest(c *gin.Context) {
 
 	var input model.UpdateRequestInput
 	if err := c.BindJSON(&input); err != nil {
+		fmt.Println(input)
 		newErrorResponse(c, http.StatusBadRequest, err.Error())
 		return
 	}
